@@ -1,0 +1,275 @@
+@use './abstracts/colors';
+
+.c_home_movies_container_filters {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 20px;
+	flex-wrap: wrap;
+
+	.c_home_movies_container_filters_left {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 30px;
+		margin-top: 20px;
+		p {
+			opacity: 0.7;
+			cursor: pointer;
+			margin: 0;
+
+			&.active {
+				opacity: 1;
+				font-weight: 600;
+			}
+		}
+	}
+
+	.c_home_movies_container_filters_right {
+		margin-top: 20px;
+	}
+}
+
+.c_grid_4_container {
+	display: grid;
+	margin-top: 20px;
+	grid-template-columns: repeat(5, 1fr);
+	gap: 30px;
+}
+
+.c_movie_container {
+	cursor: pointer;
+	transition: all 0.3s;
+	&:hover {
+		transform: scale(1.03);
+	}
+
+	.c_movie_desc_details {
+		opacity: 0.6;
+		margin: 0;
+		margin-top: 8px;
+		font-size: 14px;
+		letter-spacing: 2px;
+	}
+
+	.c_movie_desc_title {
+		font-weight: 600;
+		font-size: 20px;
+	}
+}
+
+.c_movie_img_container {
+	width: 100%;
+	img {
+		height: 400px;
+	}
+}
+
+.c_home_m_kids_container {
+	margin-top: 40px;
+	background: url('../assets/images/Home/soft-gradient-background.jpg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	padding: 30px;
+	position: relative;
+}
+
+.c_home_m_kids_slider {
+	overflow-x: scroll;
+	display: flex;
+	align-items: center;
+
+	.c_home_m_kids_movies_list {
+		display: flex;
+		gap: 60px;
+		margin-top: 40px;
+		align-items: center;
+
+		.c_home_m_kids_movie_container {
+			background-color: #ffffff59;
+			padding: 30px;
+			border-radius: 30px;
+			display: flex;
+		}
+
+		.c_movie_container {
+			width: 200px;
+		}
+
+		.c_movie_img_container {
+			text-align: center;
+			img {
+				height: 300px;
+			}
+		}
+	}
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+.c_slider {
+	overflow-x: scroll;
+	display: flex;
+	align-items: center;
+
+	.c_slider_list {
+		display: flex;
+		gap: 60px;
+		margin-top: 40px;
+		align-items: center;
+	}
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+.c_slider_sale_el {
+	flex: 0 0 auto;
+	width: 100%;
+	max-width: 400px;
+	cursor: pointer;
+	img {
+		width: 100%;
+		height: 100%;
+	}
+	position: relative;
+
+	.c_slider_sale_el_hover {
+		display: none;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		padding: 10px 30px;
+
+		border: 1px dashed #fff;
+		p {
+			margin: 0;
+			font-weight: 600;
+		}
+	}
+
+	transition: all 0.3s;
+
+	&:hover {
+		.c_slider_sale_el_hover {
+			display: block;
+			z-index: 1;
+		}
+		&::after {
+			content: '';
+			top: 0;
+			left: 0;
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			background-color: rgba($color: #000000, $alpha: 0.8);
+			border: 1px solid #555555;
+		}
+	}
+}
+
+.slider-btn {
+	background-color: #ffffff59;
+	width: 35px;
+	height: 35px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	cursor: pointer;
+	position: absolute;
+	left: 50px;
+
+	transition: all 0.3s;
+
+	&.arrow-right {
+		right: 50px;
+		left: unset;
+	}
+
+	&:hover {
+		transform: scale(1.03);
+	}
+
+	&.hidden {
+		visibility: hidden;
+	}
+}
+
+.c_section_title {
+	font-weight: 700;
+	font-size: 2rem;
+}
+
+.c_container.c_slider_container {
+	padding: 0;
+}
+
+@media screen and (max-width: 1800px) {
+	.slider-btn {
+		left: 20px;
+
+		&.arrow-right {
+			right: 20px;
+		}
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.slider-btn {
+		display: none;
+	}
+
+	.c_slider_sale_el {
+		max-width: 300px;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.c_slider_sale_el {
+		max-width: 100%;
+	}
+}
+
+@media screen and (max-width: 1600px) {
+	.c_grid_4_container {
+		grid-template-columns: repeat(4, 1fr);
+		gap: 10px;
+	}
+}
+
+@media screen and (max-width: 1200px) {
+	.c_grid_4_container {
+		grid-template-columns: repeat(3, 1fr);
+		gap: 10px;
+		text-align: center;
+		img {
+			height: 300px !important;
+		}
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.c_grid_4_container {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 10px;
+	}
+}
+
+@media screen and (max-width: 566px) {
+	.c_movie_img_container {
+		img {
+			height: 200px !important;
+		}
+	}
+}
+
+@media screen and (max-width: 320px) {
+	.c_grid_4_container {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}

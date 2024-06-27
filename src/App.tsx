@@ -1,19 +1,7 @@
-import Header from './components/Header'
-
-import Banner from './components/Home/Banner'
+import HomePage from './views/HomePage'
 
 function App() {
-	return (
-		<>
-			<Header />
-			<Banner />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-		</>
-	)
+	return <HomePage />
 }
 
 export default App
