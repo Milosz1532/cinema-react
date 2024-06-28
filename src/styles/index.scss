@@ -19,9 +19,18 @@ ul {
 	text-decoration: none;
 }
 
+a {
+	text-decoration: none;
+	color: unset;
+}
+
 .c_container {
 	max-width: 1600px;
 	margin: auto;
+}
+
+.content {
+	min-height: 50vh;
 }
 
 .c_main_btn {

@@ -4,7 +4,7 @@ import Movie from './Home/Movie'
 import { IMovie } from '../types/types'
 
 interface SliderProps {
-	items: IMovie[]
+	items: IMovie[] | null
 }
 
 const Slider: React.FC<SliderProps> = ({ items }) => {

@@ -1,5 +1,3 @@
-import Header from '../components/Header'
-
 import Banner from '../components/Home/Banner'
 
 import '../styles/home.scss'
@@ -9,7 +7,6 @@ import Movie from '../components/Home/Movie'
 import KidsMovieSlider from '../components/Home/KidsMovieSlider'
 import Slider from '../components/Slider'
 import SaleSlider from '../components/Home/SaleSlider'
-import Footer from '../components/Footer'
 
 import LoadingScreen from '../components/LoadingScreen'
 
@@ -25,7 +22,7 @@ export default function HomePage() {
 	const [homeData, setHomeData] = useState<types.IHomeData | null>(null)
 
 	const [showtimeSelectedValue, setShowtimeSelectedValue] = useState<number>(1)
-	const [showtimeArray, setShowtimeArray] = useState<types.IMovie[] | null>(null)
+	const [showtimeArray, setShowtimeArray] = useState<types.IHomeShowtime[] | null>(null)
 
 	const movieTypes = [
 		{ id: 1, name: 'All', value: 'all' },
@@ -99,8 +96,7 @@ export default function HomePage() {
 		} else {
 			setShowtimeArray([])
 		}
-		console.log(showtimeArray)
-	}, [showtimeSelectedValue])
+	}, [showtimeSelectedValue, homeData])
 
 	const handleChangeShowtimeValue = (state: number) => {
 		setShowtimeSelectedValue(state)
@@ -112,7 +108,6 @@ export default function HomePage() {
 
 			{!isLoading && (
 				<>
-					<Header />
 					<Banner />
 
 					<div className='c_container'>
@@ -145,8 +140,8 @@ export default function HomePage() {
 							<div className='c_grid_4_container'>
 								{showtimeArray.map(movie => (
 									<Movie
-										key={movie._id}
-										_id={movie._id}
+										key={movie.id}
+										id={movie.movieId}
 										title={movie.title}
 										imgUrl={movie.imgUrl}
 										productionYear={movie.productionYear}
@@ -176,8 +171,6 @@ export default function HomePage() {
 						<h4 className='c_section_title'>Sales</h4>
 						<SaleSlider items={salesArray} />
 					</div>
-
-					<Footer />
 				</>
 			)}
 		</>

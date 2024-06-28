@@ -67,9 +67,9 @@ const KidsMovieSlider: React.FC<KidsMovieSliderProps> = ({ kidsMovieArray }) => 
 					<div className='c_home_m_kids_movies_list'>
 						{kidsMovieArray &&
 							kidsMovieArray.map(movie => (
-								<div className='c_home_m_kids_movie_container' key={movie._id}>
+								<div className='c_home_m_kids_movie_container' key={movie.id}>
 									<Movie
-										_id={movie._id}
+										id={movie.id}
 										title={movie.title}
 										imgUrl={movie.imgUrl}
 										productionYear={movie.productionYear}

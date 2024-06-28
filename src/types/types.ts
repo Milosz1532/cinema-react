@@ -1,5 +1,15 @@
 export interface IMovie {
-	_id: number
+	id: string
+	title: string
+	genre: string
+	productionYear: number
+	duration: number
+	imgUrl: string
+}
+
+export interface IHomeShowtime {
+	id: string
+	movieId: string
 	title: string
 	genre: string
 	productionYear: number
@@ -12,7 +22,7 @@ export interface IHomeData {
 	generalRepertoire: IMovie[]
 	top5Movies: IMovie[]
 	showtime: {
-		today: IMovie[]
-		tomorrow: IMovie[]
+		today: IHomeShowtime[]
+		tomorrow: IHomeShowtime[]
 	}
 }
