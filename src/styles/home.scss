@@ -29,6 +29,29 @@
 	}
 }
 
+.c_home_empty_container {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+
+	padding: 20px 0px;
+
+	h4 {
+		color: colors.$dark-text-color;
+		font-weight: 700;
+	}
+
+	.c_home_empty_img_container {
+		max-width: 500px;
+
+		img {
+			width: 100%;
+		}
+	}
+}
+
 .c_grid_4_container {
 	display: grid;
 	margin-top: 20px;

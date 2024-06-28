@@ -1,18 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { TfiAngleLeft, TfiAngleRight } from 'react-icons/tfi'
 import Movie from './Home/Movie'
-
-interface Movie {
-	id: number
-	title: string
-	img: string
-	year: number
-	time: string
-	genre: string
-}
+import { IMovie } from '../types/types'
 
 interface SliderProps {
-	items: Movie[]
+	items: IMovie[]
 }
 
 const Slider: React.FC<SliderProps> = ({ items }) => {
@@ -71,13 +63,13 @@ const Slider: React.FC<SliderProps> = ({ items }) => {
 				<div className='c_slider_list'>
 					{items.map(movie => (
 						<Movie
-							key={movie.id}
-							id={movie.id}
+							key={movie._id}
+							_id={movie._id}
 							title={movie.title}
-							img={movie.img}
-							year={movie.year}
+							imgUrl={movie.imgUrl}
+							productionYear={movie.productionYear}
 							genre={movie.genre}
-							time={movie.time}
+							duration={movie.duration}
 						/>
 					))}
 				</div>

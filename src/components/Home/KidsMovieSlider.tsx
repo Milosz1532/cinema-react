@@ -2,17 +2,10 @@ import React, { useRef, useState, useEffect } from 'react'
 import { TfiAngleLeft, TfiAngleRight } from 'react-icons/tfi'
 import Movie from './Movie'
 
-interface Movie {
-	id: number
-	title: string
-	img: string
-	year: number
-	time: string
-	genre: string
-}
+import { IMovie } from '../../types/types'
 
 interface KidsMovieSliderProps {
-	kidsMovieArray: Movie[]
+	kidsMovieArray: IMovie[] | null
 }
 
 const KidsMovieSlider: React.FC<KidsMovieSliderProps> = ({ kidsMovieArray }) => {
@@ -72,18 +65,19 @@ const KidsMovieSlider: React.FC<KidsMovieSliderProps> = ({ kidsMovieArray }) => 
 					</div>
 
 					<div className='c_home_m_kids_movies_list'>
-						{kidsMovieArray.map(movie => (
-							<div className='c_home_m_kids_movie_container' key={movie.id}>
-								<Movie
-									id={movie.id}
-									title={movie.title}
-									img={movie.img}
-									year={movie.year}
-									genre={movie.genre}
-									time={movie.time}
-								/>
-							</div>
-						))}
+						{kidsMovieArray &&
+							kidsMovieArray.map(movie => (
+								<div className='c_home_m_kids_movie_container' key={movie._id}>
+									<Movie
+										_id={movie._id}
+										title={movie.title}
+										imgUrl={movie.imgUrl}
+										productionYear={movie.productionYear}
+										genre={movie.genre}
+										duration={movie.duration}
+									/>
+								</div>
+							))}
 					</div>
 
 					<div
