@@ -45,3 +45,16 @@ export const getHomePageData = async () => {
 		}
 	}
 }
+
+export const getMovieDetails = async (id: string) => {
+	try {
+		const response = await axiosClient.get(`/movies/${id}`)
+		return response.data
+	} catch (error) {
+		if (error instanceof AxiosError && error.response) {
+			throw error.response.data
+		} else {
+			throw error
+		}
+	}
+}
