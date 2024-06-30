@@ -1,21 +1,26 @@
+.c_navbar {
+	background-color: #0e0e0e;
+}
+
 .c_main_header {
-	height: 80px;
+	min-height: 80px;
 	padding: 15px 80px;
 	display: flex;
 	align-items: center;
-	margin-top: 10px;
+	padding-top: 20px;
 
 	.c_nav_logo_container {
 		display: flex;
 		align-items: center;
+		cursor: pointer;
+		transition: all 0.3s;
 		img {
 			width: 70px;
 			margin-right: 10px;
 		}
-		.c_nav_logo_title {
-			color: #fff;
-			font-weight: 700;
-			margin: 0;
+
+		&:hover {
+			transform: scale(1.03);
 		}
 	}
 

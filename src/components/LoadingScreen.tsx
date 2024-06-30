@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import Lottie from 'lottie-react'
 import loadingAnimation from '../assets/animations/loading-animation.json'
@@ -10,6 +10,18 @@ interface Props {
 
 const LoadingScreen: React.FC<Props> = ({ isLoading }) => {
 	const nodeRef = useRef(null)
+
+	useEffect(() => {
+		if (isLoading) {
+			document.body.classList.add('no-scroll')
+		} else {
+			document.body.classList.remove('no-scroll')
+		}
+
+		return () => {
+			document.body.classList.remove('no-scroll')
+		}
+	}, [isLoading])
 
 	return (
 		<CSSTransition

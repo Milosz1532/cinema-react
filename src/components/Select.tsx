@@ -4,14 +4,15 @@ import { MdOutlineKeyboardArrowDown } from 'react-icons/md'
 interface Option {
 	id: number
 	name: string
-	value: string
+	value: string | Date
 }
 
 interface OptionsListProps {
 	options: Option[]
+	icon?: React.ReactNode
 }
 
-const Select: React.FC<OptionsListProps> = ({ options }) => {
+const Select: React.FC<OptionsListProps> = ({ options, icon }) => {
 	const [selectedIndex, setSelectedIndex] = useState<number>(1)
 	const [isActive, setIsActive] = useState<boolean>(false)
 
@@ -25,10 +26,11 @@ const Select: React.FC<OptionsListProps> = ({ options }) => {
 				className={`c_select purple ${isActive ? 'active' : 'hidden'}`}
 				onClick={() => setIsActive(!isActive)}>
 				<div className='c_select_selected_container'>
+					{icon && <i className='me-2'>{icon}</i>}
 					<div className='c_celect_selected_option'>
 						<span>{options.find(el => el.id == selectedIndex)?.name}</span>
 					</div>
-					<i>
+					<i className='c_select_drop_icon'>
 						<MdOutlineKeyboardArrowDown size={25} />
 					</i>
 				</div>

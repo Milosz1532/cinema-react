@@ -7,6 +7,13 @@ export interface IMovie {
 	imgUrl: string
 }
 
+export interface IActor {
+	id: number
+	name: string
+	imgUrl: string
+	characterName: string
+}
+
 export interface IHomeShowtime {
 	id: string
 	movieId: string
