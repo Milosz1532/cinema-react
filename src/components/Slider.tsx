@@ -61,17 +61,18 @@ const Slider: React.FC<SliderProps> = ({ items }) => {
 				</div>
 
 				<div className='c_slider_list'>
-					{items.map(movie => (
-						<Movie
-							key={movie._id}
-							_id={movie._id}
-							title={movie.title}
-							imgUrl={movie.imgUrl}
-							productionYear={movie.productionYear}
-							genre={movie.genre}
-							duration={movie.duration}
-						/>
-					))}
+					{items &&
+						items.map(movie => (
+							<Movie
+								key={movie.id}
+								id={movie.id}
+								title={movie.title}
+								imgUrl={movie.imgUrl}
+								productionYear={movie.productionYear}
+								genre={movie.genre}
+								duration={movie.duration}
+							/>
+						))}
 				</div>
 
 				<div className={`slider-btn arrow-right ${isAtEnd ? 'hidden' : ''}`} onClick={scrollRight}>

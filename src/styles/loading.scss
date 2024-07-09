@@ -15,6 +15,10 @@
 		font-size: 30px;
 		opacity: 0.8;
 	}
+	z-index: 10;
+	position: fixed;
+	top: 0;
+	left: 0;
 }
 
 .c_loading_anim-enter {

@@ -11,7 +11,6 @@ export interface IShowtime {
 	id: string
 	movieId: string
 	screenId: string
-	date: Date
 	time: string
 	language: string
 	movieType: string
@@ -31,7 +30,11 @@ export interface IMovieDetails {
 	bannerUrl: string
 	ageRating: string
 	trailerUrl: string
-	showtimes: IShowtime
+	showtimes: {
+		today: IShowtime[]
+		tomorrow: IShowtime[]
+		dayAfterTomorrow: IShowtime[]
+	}
 	otherMovies: IMovie[]
 }
 

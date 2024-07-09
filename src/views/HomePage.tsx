@@ -140,7 +140,7 @@ export default function HomePage() {
 							<div className='c_grid_4_container'>
 								{showtimeArray.map(movie => (
 									<Movie
-										key={movie.id}
+										key={movie.movieId}
 										id={movie.movieId}
 										title={movie.title}
 										imgUrl={movie.imgUrl}
@@ -164,7 +164,7 @@ export default function HomePage() {
 
 					<div className='c_container mt-5'>
 						<h4 className='c_section_title'>Top 5 to this week</h4>
-						<Slider items={homeData && homeData.kidsRepertoire} />
+						<Slider items={homeData && homeData.generalRepertoire} />
 					</div>
 
 					<div className='c_container mt-5'>

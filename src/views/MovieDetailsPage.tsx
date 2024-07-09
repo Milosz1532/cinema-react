@@ -15,6 +15,10 @@ import { useNavigate, useParams } from 'react-router-dom'
 import LoadingScreen from '../components/LoadingScreen'
 import Movie from '../components/Home/Movie'
 
+import { addDays, format } from 'date-fns'
+import Showtime from '../components/MovieDetails/Showtime'
+import EmptyShowtimes from '../components/MovieDetails/EmptyShowtimes'
+
 const formatDuration = (minutes: number): string => {
 	const hours = Math.floor(minutes / 60)
 	const remainingMinutes = minutes % 60
@@ -46,17 +50,14 @@ export default function MovieDetailsPage() {
 	useEffect(() => {
 		const fetchData = async () => {
 			if (!id) return
+			setIsLoading(true)
 			try {
 				const data = await getMovieDetails(id)
-				console.log(data)
 				if (data) {
 					setData(data)
-					setTimeout(() => {
-						setIsLoading(false)
-					}, 1000)
+					setIsLoading(false)
 				}
 			} catch {
-				//
 				navigate('/404')
 			}
 		}
@@ -65,22 +66,17 @@ export default function MovieDetailsPage() {
 
 	const [selectedShowtime, setSelectedShowtime] = useState<string | null>(null)
 
-	const showtimeArray = [
-		{ id: '1', time: '10:00', movieType: '2D', lang: 'Dubbing pl' },
-		{ id: '2', time: '12:00', movieType: '2D', lang: 'Dubbing pl' },
-		{ id: '3', time: '14:00', movieType: '2D', lang: 'Dubbing pl' },
-		{ id: '4', time: '17:00', movieType: '2D', lang: 'Dubbing pl' },
-	]
-
 	return (
 		<>
 			<LoadingScreen isLoading={isLoading} />
 
 			{!isLoading && (
 				<>
-					<div className='c_videoplayer_container'>
-						<VideoPlayer url={data?.trailerUrl ?? ''} />
-					</div>
+					{data?.trailerUrl && (
+						<div className='c_videoplayer_container'>
+							<VideoPlayer url={data?.trailerUrl ?? ''} />
+						</div>
+					)}
 
 					<div className='c_container'>
 						<div className='c_movie_details_container'>
@@ -131,33 +127,41 @@ export default function MovieDetailsPage() {
 							))}
 						</div>
 						<div className='d-flex justify-content-between align-items-center mt-3'>
-							<h4 className='c_section_title'>Showtimes</h4>
+							<h4 className='c_section_title mb-0'>Showtimes</h4>
 
 							<Select options={showtimesDays} icon={<FaRegCalendarAlt />} />
 						</div>
-						<div className='c_movie_details_showtimes_container'>
-							<div className='c_showtimes_container_date'>
-								<i className='me-3'>
-									<FaRegCalendarAlt size={20} />
-								</i>
-								<h5>Today, 30.06.2024</h5>
-							</div>
 
-							<div className='c_showtimes_container_times'>
-								{showtimeArray.map(el => (
-									<button
-										key={el.id}
-										className={`c_showtime_btn ${selectedShowtime == el.id ? 'active' : ''}`}
-										onClick={() => setSelectedShowtime(el.id)}>
-										<div className='c_showtime_btn_time'>
-											<span>{el.time}</span>
-										</div>
-										<div className='c_showtime_btn_desc'>
-											{el.movieType}, {el.lang}
-										</div>
-									</button>
-								))}
-							</div>
+						<div className='c_movie_details_showtimes_container'>
+							{data && data?.showtimes.today.length > 0 && (
+								<Showtime
+									date={`Today ${format(new Date(), 'dd.MM.yyyy')}`}
+									items={data.showtimes.today}
+									selectedShowtime={selectedShowtime}
+									setSelectedShowtime={setSelectedShowtime}
+								/>
+							)}
+							{data && data?.showtimes.tomorrow.length > 0 && (
+								<Showtime
+									date={`Tomorrow ${format(addDays(new Date(), 1), 'dd.MM.yyyy')}`}
+									items={data.showtimes.tomorrow}
+									selectedShowtime={selectedShowtime}
+									setSelectedShowtime={setSelectedShowtime}
+								/>
+							)}
+							{data && data?.showtimes.dayAfterTomorrow.length > 0 && (
+								<Showtime
+									date={`Day after tomorrow ${format(addDays(new Date(), 1), 'dd.MM.yyyy')}`}
+									items={data.showtimes.dayAfterTomorrow}
+									selectedShowtime={selectedShowtime}
+									setSelectedShowtime={setSelectedShowtime}
+								/>
+							)}
+
+							{data &&
+								!data.showtimes.today.length &&
+								!data.showtimes.tomorrow.length &&
+								!data.showtimes.dayAfterTomorrow.length && <EmptyShowtimes />}
 						</div>
 						<div className='c_showtimes_buy_ticket_container mt-5 text-center'>
 							<button
