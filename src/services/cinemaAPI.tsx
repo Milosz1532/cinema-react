@@ -58,3 +58,16 @@ export const getMovieDetails = async (id: string) => {
 		}
 	}
 }
+
+export const getShowtimeDetails = async (id: string) => {
+	try {
+		const response = await axiosClient.get(`/showtime/${id}`)
+		return response.data
+	} catch (error) {
+		if (error instanceof AxiosError && error.response) {
+			throw error.response.data
+		} else {
+			throw error
+		}
+	}
+}

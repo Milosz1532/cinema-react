@@ -5,6 +5,7 @@ import DefaultLayout from '../layouts/DefaultLayout'
 // import NotFound from '../views/NotFound'
 import HomePage from '../views/HomePage'
 import MovieDetailsPage from '../views/MovieDetailsPage'
+import BookingTicketPage from '../views/BookingTicketPage'
 
 const router = createBrowserRouter([
 	{
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
 			{
 				path: '/movie/:id',
 				element: <MovieDetailsPage />,
+			},
+			{
+				path: '/bookingTicket/:id',
+				element: <BookingTicketPage />,
 			},
 		],
 	},

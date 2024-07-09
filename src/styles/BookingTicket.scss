@@ -1,0 +1,199 @@
+@use './abstracts/colors';
+
+.c_booking_ticket_movie_container {
+	display: flex;
+	flex-direction: row;
+	.c_booking_ticket_img_container {
+		// flex: 1;
+		height: 250px;
+		margin-right: 30px;
+		img {
+			// width: 100%;
+			height: 100%;
+			border-radius: 10px;
+		}
+	}
+
+	.c_booking_ticket_details_container {
+		flex: 6;
+
+		.c_movie_details_content_movie_title {
+			display: flex;
+			align-items: center;
+			font-size: 32px !important;
+			font-weight: 600;
+			letter-spacing: 2px;
+
+			.separator {
+				margin: 0px 9px;
+				font-weight: 300;
+			}
+		}
+
+		.c_movie_details_content_title {
+			color: colors.$dark-text-color;
+			margin-top: 10px;
+			font-weight: 400;
+			font-size: 18px;
+		}
+
+		.movie_details {
+			font-weight: 600;
+			span {
+				font-weight: 400;
+				color: colors.$text-color;
+				margin-left: 5px;
+			}
+		}
+
+		.c_booking_details {
+			display: flex;
+			align-items: center;
+			i {
+				margin-right: 5px;
+			}
+			span {
+				margin-top: 2px;
+			}
+			font-weight: 400;
+			color: colors.$text-color;
+			margin-right: 30px;
+		}
+
+		.c_booking_ticket_showtime_details {
+			display: flex;
+			flex-wrap: wrap;
+		}
+	}
+}
+
+.c_booking_ticket_row {
+	display: flex;
+	margin-top: 40px;
+	gap: 15em;
+	.c_booking_ticket_col_seat {
+		flex: 3;
+
+		.c_booking_ticket_legend {
+			background-color: #222;
+			padding: 15px 50px;
+			border-radius: 20px;
+
+			ul {
+				margin: 0;
+				padding: 0;
+				display: flex;
+				justify-content: space-between;
+				gap: 30px;
+				.c_booking_ticket_legend_el {
+					display: flex;
+					align-items: center;
+					i {
+						margin-right: 10px;
+					}
+					span {
+						font-weight: 500;
+						color: colors.$text-color;
+					}
+
+					&.selected {
+						i {
+							color: colors.$app-main-color;
+						}
+					}
+					&.busy {
+						i {
+							color: colors.$dark-text-color;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.c_booking_ticket_col {
+		flex: 2;
+	}
+}
+
+.c_booking_ticket_screen_row {
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+
+	.c_booking_ticket_screen_row_number {
+		margin: 0px 5px;
+		color: colors.$text-color;
+		width: 15px;
+	}
+
+	.c_booking_ticket_screen_row_content {
+		flex: 1;
+		display: flex;
+		gap: 10px;
+
+		.c_booking_ticket_screen_seat {
+			cursor: pointer;
+
+			&.selected {
+				color: colors.$app-main-color;
+			}
+		}
+
+		.c_booking_ticket_screen_empty_seat {
+			width: 35px;
+		}
+	}
+}
+
+.c_booking_ticket_screen_image_container {
+	text-align: center;
+	opacity: 0.7;
+	scale: 0.8;
+}
+
+.c_booking_ticket_summary_container {
+	background-color: #201d28;
+	border-radius: 10px;
+	padding: 30px 40px;
+	border: 1px solid colors.$border-color;
+
+	ul {
+		margin: 0;
+		padding: 0;
+		margin-top: 20px;
+
+		li {
+			border-bottom: 1px solid colors.$border-color;
+			padding: 10px 0px;
+			font-weight: 500;
+			font-size: 20px;
+			display: flex;
+			justify-content: space-between;
+
+			.seat_number {
+				font-size: 18px;
+				font-weight: 400;
+			}
+
+			.seat_number_price_total {
+				color: colors.$app-color-4;
+			}
+
+			&:last-child {
+				border-bottom: none;
+			}
+		}
+	}
+
+	.c_booking_ticket_summary_input {
+		background-color: #222;
+		border: none;
+		outline: none;
+		width: 100%;
+		padding: 10px 20px;
+		border-radius: 8px;
+		margin-top: 20px;
+		color: #fff;
+	}
+}

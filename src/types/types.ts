@@ -5,6 +5,18 @@ export interface IMovie {
 	productionYear: number
 	duration: number
 	imgUrl: string
+	ageRating?: string
+}
+
+export interface ISeat {
+	type: string
+	_id: string
+}
+
+export interface IScreen {
+	id: string
+	name: string
+	rows: ISeat[][]
 }
 
 export interface IShowtime {
@@ -14,6 +26,16 @@ export interface IShowtime {
 	time: string
 	language: string
 	movieType: string
+}
+
+export interface IShowTimeDetails {
+	id: string
+	date: string
+	time: string
+	language: string
+	movieType: string
+	movie: IMovie
+	screen: IScreen
 }
 
 export interface IMovieDetails {

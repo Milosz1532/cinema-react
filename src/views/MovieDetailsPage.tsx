@@ -66,6 +66,12 @@ export default function MovieDetailsPage() {
 
 	const [selectedShowtime, setSelectedShowtime] = useState<string | null>(null)
 
+	const handleClickBuyTicket = () => {
+		if (selectedShowtime) {
+			navigate(`/bookingTicket/${selectedShowtime}`)
+		}
+	}
+
 	return (
 		<>
 			<LoadingScreen isLoading={isLoading} />
@@ -159,15 +165,21 @@ export default function MovieDetailsPage() {
 							)}
 
 							{data &&
-								!data.showtimes.today.length &&
-								!data.showtimes.tomorrow.length &&
-								!data.showtimes.dayAfterTomorrow.length && <EmptyShowtimes />}
-						</div>
-						<div className='c_showtimes_buy_ticket_container mt-5 text-center'>
-							<button
-								className={`c_main_btn gradient px-5 ${selectedShowtime ? 'active' : 'disable'}`}>
-								Buy ticket
-							</button>
+							!data.showtimes.today.length &&
+							!data.showtimes.tomorrow.length &&
+							!data.showtimes.dayAfterTomorrow.length ? (
+								<EmptyShowtimes />
+							) : (
+								<div className='c_showtimes_buy_ticket_container mt-5 text-center'>
+									<button
+										className={`c_main_btn gradient px-5 ${
+											selectedShowtime ? 'active' : 'disable'
+										}`}
+										onClick={handleClickBuyTicket}>
+										Buy ticket
+									</button>
+								</div>
+							)}
 						</div>
 
 						<h4 className='c_section_title mt-5 mb-3'>You might also like</h4>
