@@ -263,6 +263,18 @@
 	color: colors.$text-color;
 }
 
+.c_form_group.error {
+	input {
+		border-color: tomato;
+	}
+}
+
+.c_form_error_message {
+	background-color: tomato;
+	border-radius: 10px;
+	padding: 10px 0px;
+}
+
 .c_booking_summary_total_container {
 	flex: 1;
 }
@@ -285,6 +297,18 @@
 		.c_booking_ticket_screen_empty_seat {
 			width: 1.8rem !important;
 		}
+	}
+}
+
+@media screen and (max-width: 1050px) {
+	.c_booking_summary_row {
+		gap: 5em;
+	}
+}
+
+@media screen and (max-width: 920px) {
+	.c_booking_summary_row {
+		flex-direction: column;
 	}
 }
 

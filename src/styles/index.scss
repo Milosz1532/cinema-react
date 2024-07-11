@@ -47,6 +47,16 @@ a {
 	color: #fff;
 	transition: all 0.3s;
 
+	p {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		span {
+			margin-right: 8px;
+		}
+		margin: 0;
+	}
+
 	&.bordered {
 		background-color: transparent;
 		border: 1px solid #fff;
@@ -236,6 +246,15 @@ input[type='checkbox'] {
 		&::after {
 			background-color: colors.$app-main-color;
 		}
+	}
+}
+
+.c_checkbox_group.error {
+	label {
+		color: tomato;
+	}
+	input[type='checkbox'] {
+		border-color: tomato;
 	}
 }
 

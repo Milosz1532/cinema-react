@@ -19,6 +19,8 @@ import { format } from 'date-fns'
 
 import screenImage from '../assets/images/screen.png'
 import { LiaAngleLeftSolid } from 'react-icons/lia'
+import SuccessModal from '../components/BookingTicket/SuccessModal'
+import { ClipLoader } from 'react-spinners'
 
 interface IFormState {
 	email: string
@@ -31,12 +33,30 @@ type FormErrors = {
 	[K in keyof IFormState]?: string
 }
 
+interface Seat {
+	id: string
+	label: string
+}
+
 export default function BookingTicketPage() {
 	const { id } = useParams<{ id: string }>()
 	const navigate = useNavigate()
 
+	const seatsArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L']
+
 	const [isLoading, setIsLoading] = useState<boolean>(true)
 	const [data, setData] = useState<types.IShowTimeDetails | null>(null)
+	const [isSubmitButtonLoading, setIsSubmitButtonLoading] = useState<boolean>(false)
+	const [isSuccessModalVisible, setIsSuccessModalVisible] = useState<boolean>(false)
+	const [bookingStep, setBookingStep] = useState<number>(1)
+	const [selectedSeats, setSelectedSeats] = useState<Seat[]>([])
+	const [formState, setFormState] = useState<IFormState>({
+		email: '',
+		phoneNumber: '',
+		fullName: '',
+		acceptTerms: false,
+	})
+	const [formErrors, setFormErrors] = useState<FormErrors>({})
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -54,17 +74,6 @@ export default function BookingTicketPage() {
 		}
 		fetchData()
 	}, [id])
-
-	const seatsArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L']
-
-	interface Seat {
-		id: string
-		label: string
-	}
-
-	const [bookingStep, setBookingStep] = useState<number>(1)
-
-	const [selectedSeats, setSelectedSeats] = useState<Seat[]>([])
 
 	const handleSelectSeat = (rowIndex: number, seatIndex: number, seatId: string): void => {
 		const seatLabel = `${seatsArray[rowIndex]}${seatIndex + 1}`
@@ -86,13 +95,7 @@ export default function BookingTicketPage() {
 		}
 	}
 
-	const [formState, setFormState] = useState<IFormState>({
-		email: '',
-		phoneNumber: '',
-		fullName: '',
-		acceptTerms: false,
-	})
-	const [formErrors, setFormErrors] = useState<FormErrors>({})
+	type FormErrorName = keyof FormErrors
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value, type, checked } = e.target
@@ -100,6 +103,13 @@ export default function BookingTicketPage() {
 			...prevState,
 			[name]: type === 'checkbox' ? checked : value,
 		}))
+
+		setFormErrors(prevErrors => {
+			const newErrors = { ...prevErrors }
+			const errorName = name as FormErrorName
+			delete newErrors[errorName]
+			return newErrors
+		})
 	}
 
 	const validateForm = (formState: IFormState): FormErrors => {
@@ -125,8 +135,16 @@ export default function BookingTicketPage() {
 		const errors = validateForm(formState)
 		setFormErrors(errors)
 		if (Object.keys(errors).length === 0) {
-			console.log('Form submitted:', formState)
+			setIsSubmitButtonLoading(true)
+			setTimeout(() => {
+				setIsSuccessModalVisible(true)
+			}, 1000)
 		}
+	}
+
+	const handleModalConfirm = () => {
+		setIsSuccessModalVisible(false)
+		navigate('/')
 	}
 
 	return (
@@ -308,7 +326,6 @@ export default function BookingTicketPage() {
 														value={formState.email}
 														onChange={handleChange}
 													/>
-													{formErrors.email && <div className='error'>{formErrors.email}</div>}
 												</div>
 
 												<div className={`c_form_group ${formErrors.phoneNumber ? 'error' : ''}`}>
@@ -320,9 +337,6 @@ export default function BookingTicketPage() {
 														value={formState.phoneNumber}
 														onChange={handleChange}
 													/>
-													{formErrors.phoneNumber && (
-														<div className='error'>{formErrors.phoneNumber}</div>
-													)}
 												</div>
 
 												<div className={`c_form_group ${formErrors.fullName ? 'error' : ''}`}>
@@ -334,12 +348,12 @@ export default function BookingTicketPage() {
 														value={formState.fullName}
 														onChange={handleChange}
 													/>
-													{formErrors.fullName && (
-														<div className='error'>{formErrors.fullName}</div>
-													)}
 												</div>
 
-												<div className='c_checkbox_group mt-3'>
+												<div
+													className={`c_checkbox_group mt-3 ${
+														formErrors.acceptTerms ? 'error' : ''
+													}`}>
 													<input
 														type='checkbox'
 														id='acceptTerms'
@@ -352,12 +366,11 @@ export default function BookingTicketPage() {
 													</label>
 												</div>
 
-												{formErrors.acceptTerms && (
-													<div className='error'>{formErrors.acceptTerms}</div>
-												)}
-
 												<button className='c_main_btn gradient mt-3 w-100' type='submit'>
-													Pay
+													<p>
+														{isSubmitButtonLoading && <ClipLoader size={17} color='#fff' />}
+														Pay
+													</p>
 												</button>
 											</form>
 										</div>
@@ -392,6 +405,7 @@ export default function BookingTicketPage() {
 					</div>
 				</>
 			)}
+			{isSuccessModalVisible && <SuccessModal handleClick={handleModalConfirm} />}
 		</>
 	)
 }
