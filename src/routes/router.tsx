@@ -6,6 +6,8 @@ import DefaultLayout from '../layouts/DefaultLayout'
 import HomePage from '../views/HomePage'
 import MovieDetailsPage from '../views/MovieDetailsPage'
 import BookingTicketPage from '../views/BookingTicketPage'
+import LoginPage from '../views/Auth/LoginPage'
+import RegisterPage from '../views/Auth/RegisterPage'
 
 const router = createBrowserRouter([
 	{
@@ -16,7 +18,14 @@ const router = createBrowserRouter([
 				path: '/',
 				element: <HomePage />,
 			},
-
+			{
+				path: '/sign-in',
+				element: <LoginPage />,
+			},
+			{
+				path: '/sign-up',
+				element: <RegisterPage />,
+			},
 			{
 				path: '/movie/:id',
 				element: <MovieDetailsPage />,

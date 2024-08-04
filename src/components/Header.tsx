@@ -4,7 +4,7 @@ import { IoSearchOutline } from 'react-icons/io5'
 import { RxHamburgerMenu } from 'react-icons/rx'
 
 import '../styles/header.scss'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 const Header = () => {
 	return (
@@ -37,8 +37,13 @@ const Header = () => {
 								<span>EN</span>
 								<MdOutlineKeyboardArrowDown size={25} />
 							</div>
-							<button className='c_main_btn bordered'>Log in</button>
-							<button className='c_main_btn gradient ms-4'>Sign up</button>
+							<NavLink to={'/sign-in'}>
+								<button className='c_main_btn bordered'>Log in</button>
+							</NavLink>
+
+							<NavLink to={'/sign-up'}>
+								<button className='c_main_btn gradient ms-4'>Sign up</button>
+							</NavLink>
 						</div>
 					</div>
 

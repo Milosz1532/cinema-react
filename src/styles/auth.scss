@@ -1,0 +1,150 @@
+@use './abstracts/colors';
+
+.b_auth_container {
+	width: 100%;
+	min-height: 90vh;
+	background: url('../assets/images/Auth/auth_background.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	.b_auth_content_box {
+		background-color: rgba(196, 189, 189, 0.2);
+		backdrop-filter: blur(100px);
+		padding: 30px 50px;
+		padding-bottom: 10px;
+		border-radius: 10px;
+		border: 1px solid #999999;
+		min-width: 500px;
+		// min-height: 500px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		.b_auth_method_list {
+			display: flex;
+			gap: 25px;
+
+			.b_auth_method {
+				background-color: #fff;
+				padding: 10px;
+				border-radius: 50%;
+				margin-top: 20px;
+				img {
+					width: 30px;
+					height: 30px;
+				}
+			}
+		}
+
+		.b_auth_title {
+			font-weight: 600;
+		}
+
+		.b_auth_desc {
+			margin-top: 20px;
+			display: flex;
+			align-items: center;
+			text-align: center;
+			width: 100%;
+			span {
+				padding: 0px 20px;
+				font-size: 14px;
+			}
+			&::after,
+			&::before {
+				content: '';
+				flex: 1;
+				border-bottom: 1px solid rgb(199, 199, 199);
+			}
+		}
+	}
+
+	.b_auth_form_content {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		margin-top: 20px;
+	}
+
+	.c_auth_forgot_btn {
+		font-size: 12px;
+		margin-top: 10px;
+		text-align: right;
+		span {
+			cursor: pointer;
+			opacity: 0.8;
+			transition: all 0.3s;
+			&:hover {
+				opacity: 1;
+			}
+		}
+	}
+
+	.b_auth_input {
+		width: 100%;
+		background-color: transparent;
+		border: 2px solid #b3b3b3;
+		color: #fff;
+		outline: none;
+		padding: 10px 15px;
+		border-radius: 10px;
+		font-size: 14px;
+		&::placeholder {
+			color: #b3b3b3;
+		}
+	}
+
+	input[type='checkbox'] {
+		border-color: #b3b3b3;
+	}
+
+	.b_auth_checkbox_label {
+		color: #b3b3b3;
+	}
+
+	.b_auth_bottom_btn {
+		text-align: center;
+		font-size: 12px;
+		margin-top: 20px;
+
+		a {
+			color: colors.$app-color-1;
+		}
+	}
+}
+
+.c_input_password {
+	border: 2px solid #b3b3b3;
+	border-radius: 10px;
+	padding: 10px 15px;
+
+	display: flex;
+	justify-content: space-between;
+
+	input {
+		background-color: transparent;
+		outline: none;
+		border: none;
+		color: #fff;
+		font-size: 14px;
+		flex: 1;
+
+		&::placeholder {
+			color: #b3b3b3;
+		}
+	}
+
+	i {
+		margin-left: 20px;
+		cursor: pointer;
+		opacity: 0.8;
+		transition: all 0.3s;
+		&:hover {
+			opacity: 1;
+		}
+	}
+}
