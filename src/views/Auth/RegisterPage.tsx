@@ -66,7 +66,7 @@ export default function RegisterPage() {
 						</label>
 					</div>
 
-					<button className='c_main_btn gradient mt-5 w-100'>Sign Up</button>
+					<button className='c_main_btn gradient mt-3 w-100'>Sign Up</button>
 					<div className='b_auth_bottom_btn'>
 						<p>
 							Already have an account? <NavLink to={'/sign-in'}>Sign in</NavLink>

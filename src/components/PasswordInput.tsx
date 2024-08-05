@@ -4,10 +4,16 @@ import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6'
 interface PasswordInputProps {
 	value: string
 	placeholder?: string
+	className?: string
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const PasswordInput: React.FC<PasswordInputProps> = ({ value, placeholder, onChange }) => {
+const PasswordInput: React.FC<PasswordInputProps> = ({
+	value,
+	className,
+	placeholder,
+	onChange,
+}) => {
 	const [showPassword, setShowPassword] = useState(false)
 
 	const togglePasswordVisibility = () => {
@@ -15,7 +21,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ value, placeholder, onCha
 	}
 
 	return (
-		<div className='c_input_password mt-2'>
+		<div className={`c_input_password mt-2 ${className}`}>
 			<input
 				type={showPassword ? 'text' : 'password'}
 				value={value}

@@ -33,9 +33,14 @@
 				padding: 10px;
 				border-radius: 50%;
 				margin-top: 20px;
+				cursor: pointer;
 				img {
 					width: 30px;
 					height: 30px;
+				}
+				transition: all 0.3s;
+				&:hover {
+					transform: scale(1.05);
 				}
 			}
 		}
@@ -84,6 +89,18 @@
 		}
 	}
 
+	.c_auth_error_container {
+		background-color: rgb(253, 131, 110);
+		margin: 10px 0px 0px 0px;
+		border-radius: 10px;
+		padding: 4px 20px;
+		text-align: center;
+		p {
+			margin: 0;
+			font-size: 14px;
+		}
+	}
+
 	.b_auth_input {
 		width: 100%;
 		background-color: transparent;
@@ -95,6 +112,15 @@
 		font-size: 14px;
 		&::placeholder {
 			color: #b3b3b3;
+		}
+
+		&.b_input_error {
+			animation: shake 0.5s ease-in-out;
+			border-color: tomato;
+			color: tomato;
+			&::placeholder {
+				color: tomato;
+			}
 		}
 	}
 
@@ -138,6 +164,19 @@
 		}
 	}
 
+	&.b_input_error {
+		animation: shake 0.5s ease-in-out;
+		border-color: tomato;
+		color: tomato;
+		input {
+			color: tomato;
+
+			&::placeholder {
+				color: tomato;
+			}
+		}
+	}
+
 	i {
 		margin-left: 20px;
 		cursor: pointer;
@@ -146,5 +185,23 @@
 		&:hover {
 			opacity: 1;
 		}
+	}
+}
+
+@keyframes shake {
+	0% {
+		transform: translateX(0);
+	}
+	25% {
+		transform: translateX(-5px);
+	}
+	50% {
+		transform: translateX(5px);
+	}
+	75% {
+		transform: translateX(-5px);
+	}
+	100% {
+		transform: translateX(0);
 	}
 }
