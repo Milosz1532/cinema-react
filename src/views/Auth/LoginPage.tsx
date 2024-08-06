@@ -1,9 +1,10 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import Spinner from '../../assets/images/spinner-icon.svg'
 
 import '../../styles/auth.scss'
 import PasswordInput from '../../components/PasswordInput'
+import { login } from '../../services/cinemaAPI'
 
 interface Errors {
 	email?: boolean
@@ -12,9 +13,11 @@ interface Errors {
 }
 
 export default function LoginPage() {
-	const [email, setEmail] = useState<string>('')
-	const [password, setPassword] = useState<string>('')
+	const [email, setEmail] = useState<string>('test@test.com')
+	const [password, setPassword] = useState<string>('test')
 	const [errors, setErrors] = useState<Errors>({})
+
+	const navigate = useNavigate()
 
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -42,10 +45,12 @@ export default function LoginPage() {
 		setIsLoading(true)
 
 		try {
-			await new Promise(resolve => setTimeout(resolve, 2000))
-			console.log('Logged in')
+			const response = await login(email, password)
+			if (response) {
+				navigate('/')
+			}
 		} catch (error) {
-			setErrors({ message: 'Invalid login credentials' })
+			setErrors({ message: error as string })
 		} finally {
 			setIsLoading(false)
 		}
