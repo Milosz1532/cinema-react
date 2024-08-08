@@ -2,11 +2,15 @@ import appLogo from '../assets/images/logos/logo_light.png'
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md'
 import { IoSearchOutline } from 'react-icons/io5'
 import { RxHamburgerMenu } from 'react-icons/rx'
+import { FaUserCircle } from 'react-icons/fa'
 
 import '../styles/header.scss'
 import { Link, NavLink } from 'react-router-dom'
+import { useAuth } from '../hooks/useAuth'
 
-const Header = () => {
+const Header: React.FC = () => {
+	const { isLoggedIn } = useAuth()
+
 	return (
 		<nav className='c_navbar'>
 			<div className='c_container'>
@@ -21,7 +25,9 @@ const Header = () => {
 					<div className='c_main_header_content'>
 						<div className='c_main_header_center_section'>
 							<ul className='c_main_header_nav_list'>
-								<li>Repertoire</li>
+								<NavLink to={'/'}>
+									<li>Repertoire</li>
+								</NavLink>
 								<li>Events</li>
 								<li>Sale</li>
 								<li>News</li>
@@ -37,13 +43,27 @@ const Header = () => {
 								<span>EN</span>
 								<MdOutlineKeyboardArrowDown size={25} />
 							</div>
-							<NavLink to={'/sign-in'}>
-								<button className='c_main_btn bordered'>Log in</button>
-							</NavLink>
 
-							<NavLink to={'/sign-up'}>
-								<button className='c_main_btn gradient ms-4'>Sign up</button>
-							</NavLink>
+							{!isLoggedIn ? (
+								<>
+									<NavLink to={'/sign-in'}>
+										<button className='c_main_btn bordered'>Log in</button>
+									</NavLink>
+
+									<NavLink to={'/sign-up'}>
+										<button className='c_main_btn gradient ms-4'>Sign up</button>
+									</NavLink>
+								</>
+							) : (
+								<NavLink to={'/profile/personalData'}>
+									<div className='c_main_header_profile'>
+										<i>
+											<FaUserCircle size={20} />
+										</i>
+										<span>Profil</span>
+									</div>
+								</NavLink>
+							)}
 						</div>
 					</div>
 

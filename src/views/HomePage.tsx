@@ -103,7 +103,7 @@ export default function HomePage() {
 	}
 
 	return (
-		<>
+		<div className='c_main_container'>
 			<LoadingScreen isLoading={isLoading} />
 
 			{!isLoading && (
@@ -173,6 +173,6 @@ export default function HomePage() {
 					</div>
 				</>
 			)}
-		</>
+		</div>
 	)
 }

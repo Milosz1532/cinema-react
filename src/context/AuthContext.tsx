@@ -3,6 +3,8 @@ import { checkAuth } from '../services/cinemaAPI'
 
 export interface AuthContextType {
 	isLoggedIn: boolean
+	isCheckingAuth: boolean
+	loginUser: () => void
 	logoutUser: () => void
 }
 
@@ -10,6 +12,7 @@ export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
+	const [isCheckingAuth, setIsCheckingAuth] = useState<boolean>(true)
 
 	useEffect(() => {
 		const checkUserAuth = async () => {
@@ -18,11 +21,17 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 				setIsLoggedIn(isAuthenticated)
 			} catch (error) {
 				setIsLoggedIn(false)
+			} finally {
+				setIsCheckingAuth(false)
 			}
 		}
 
 		checkUserAuth()
 	}, [])
+
+	const loginUser = () => {
+		setIsLoggedIn(true)
+	}
 
 	const logoutUser = async () => {
 		try {
@@ -32,5 +41,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 		}
 	}
 
-	return <AuthContext.Provider value={{ isLoggedIn, logoutUser }}>{children}</AuthContext.Provider>
+	return (
+		<AuthContext.Provider value={{ isLoggedIn, isCheckingAuth, loginUser, logoutUser }}>
+			{children}
+		</AuthContext.Provider>
+	)
 }

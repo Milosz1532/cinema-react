@@ -8,6 +8,12 @@ import MovieDetailsPage from '../views/MovieDetailsPage'
 import BookingTicketPage from '../views/BookingTicketPage'
 import LoginPage from '../views/Auth/LoginPage'
 import RegisterPage from '../views/Auth/RegisterPage'
+import AuthRoute from './AuthRoute'
+import ProfileLayout from '../layouts/ProfileLayout'
+import PersonalPage from '../views/Profile/PersonalPage'
+import OrderHistoryPage from '../views/Profile/OrderHistoryPage'
+import TicketsPage from '../views/Profile/TicketsPage'
+import ChangePasswordPage from '../views/Profile/ChangePasswordPage'
 
 const router = createBrowserRouter([
 	{
@@ -20,11 +26,19 @@ const router = createBrowserRouter([
 			},
 			{
 				path: '/sign-in',
-				element: <LoginPage />,
+				element: (
+					<AuthRoute mustByLogin={false}>
+						<LoginPage />
+					</AuthRoute>
+				),
 			},
 			{
 				path: '/sign-up',
-				element: <RegisterPage />,
+				element: (
+					<AuthRoute mustByLogin={false}>
+						<RegisterPage />
+					</AuthRoute>
+				),
 			},
 			{
 				path: '/movie/:id',
@@ -33,6 +47,31 @@ const router = createBrowserRouter([
 			{
 				path: '/bookingTicket/:id',
 				element: <BookingTicketPage />,
+			},
+		],
+	},
+	{
+		element: (
+			<AuthRoute mustByLogin={true}>
+				<ProfileLayout />
+			</AuthRoute>
+		),
+		children: [
+			{
+				path: '/profile/personalData',
+				element: <PersonalPage />,
+			},
+			{
+				path: '/profile/orderHistory',
+				element: <OrderHistoryPage />,
+			},
+			{
+				path: '/profile/tickets',
+				element: <TicketsPage />,
+			},
+			{
+				path: '/profile/changePassword',
+				element: <ChangePasswordPage />,
 			},
 		],
 	},

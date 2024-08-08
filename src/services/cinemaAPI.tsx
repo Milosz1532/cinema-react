@@ -63,7 +63,11 @@ export const register = async (email: string, password: string) => {
 export const checkAuth = async () => {
 	try {
 		const response = await axiosClient.get('auth/check')
-		return response.data.isLoggedIn
+		if (response) {
+			return true
+		} else {
+			return false
+		}
 	} catch {
 		return false
 	}

@@ -73,6 +73,20 @@
 	}
 }
 
+.c_main_header_profile {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	i {
+		color: #57ca16;
+	}
+	span {
+		margin-left: 10px;
+		margin-top: 3px;
+		opacity: 0.7;
+	}
+}
+
 .c_main_header_mobile_menu {
 	display: none;
 }

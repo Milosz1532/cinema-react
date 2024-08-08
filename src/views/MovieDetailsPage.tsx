@@ -73,7 +73,7 @@ export default function MovieDetailsPage() {
 	}
 
 	return (
-		<>
+		<div className='c_main_container'>
 			<LoadingScreen isLoading={isLoading} />
 
 			{!isLoading && (
@@ -84,7 +84,7 @@ export default function MovieDetailsPage() {
 						</div>
 					)}
 
-					<div className='c_container'>
+					<div className='c_container pt-3'>
 						<div className='c_movie_details_container'>
 							<div className='c_movie_details_img_container'>
 								<img src={data?.imgUrl} alt='' />
@@ -200,6 +200,6 @@ export default function MovieDetailsPage() {
 					</div>
 				</>
 			)}
-		</>
+		</div>
 	)
 }

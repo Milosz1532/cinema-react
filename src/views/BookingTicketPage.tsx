@@ -148,7 +148,7 @@ export default function BookingTicketPage() {
 	}
 
 	return (
-		<>
+		<div className='c_main_container pt-3'>
 			<LoadingScreen isLoading={isLoading} />
 
 			{!isLoading && data && (
@@ -406,6 +406,6 @@ export default function BookingTicketPage() {
 				</>
 			)}
 			{isSuccessModalVisible && <SuccessModal handleClick={handleModalConfirm} />}
-		</>
+		</div>
 	)
 }

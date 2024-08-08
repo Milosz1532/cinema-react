@@ -10,10 +10,13 @@
 }
 
 body {
-	// background-color: colors.$app-background-color;
 	color: #fff;
 	background: rgb(14, 14, 14);
-	background: radial-gradient(circle, rgba(14, 14, 14, 1) 0%, rgba(39, 24, 41, 1) 90%);
+}
+
+.c_main_container {
+	background: radial-gradient(circle, rgb(14, 14, 14) 0%, rgb(39, 24, 41) 90%);
+	padding-bottom: 50px;
 }
 
 .no-scroll {
@@ -37,7 +40,7 @@ a {
 
 .content {
 	min-height: 50vh;
-	margin-bottom: 50px;
+	// margin-bottom: 50px;
 }
 
 .c_main_btn {

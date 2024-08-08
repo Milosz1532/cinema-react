@@ -5,6 +5,7 @@ import Spinner from '../../assets/images/spinner-icon.svg'
 import '../../styles/auth.scss'
 import PasswordInput from '../../components/PasswordInput'
 import { login } from '../../services/cinemaAPI'
+import { useAuth } from '../../hooks/useAuth'
 
 interface Errors {
 	email?: boolean
@@ -13,8 +14,10 @@ interface Errors {
 }
 
 export default function LoginPage() {
+	const { loginUser } = useAuth()
+
 	const [email, setEmail] = useState<string>('test@test.com')
-	const [password, setPassword] = useState<string>('test')
+	const [password, setPassword] = useState<string>('test1234')
 	const [errors, setErrors] = useState<Errors>({})
 
 	const navigate = useNavigate()
@@ -47,6 +50,7 @@ export default function LoginPage() {
 		try {
 			const response = await login(email, password)
 			if (response) {
+				loginUser()
 				navigate('/')
 			}
 		} catch (error) {
