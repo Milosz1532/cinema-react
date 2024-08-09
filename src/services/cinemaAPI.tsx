@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios'
+import { IUser, IUserDetails } from '../types/types'
 
 const axiosClient = axios.create({
 	baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -60,16 +61,16 @@ export const register = async (email: string, password: string) => {
 	}
 }
 
-export const checkAuth = async () => {
+export const checkAuth = async (): Promise<IUser | null> => {
 	try {
 		const response = await axiosClient.get('auth/check')
 		if (response) {
-			return true
+			return response.data
 		} else {
-			return false
+			return null
 		}
 	} catch {
-		return false
+		return null
 	}
 }
 
@@ -108,6 +109,32 @@ export const getShowtimeDetails = async (id: string) => {
 			throw error.response.data
 		} else {
 			throw error
+		}
+	}
+}
+
+export const getUserDetails = async (): Promise<IUserDetails> => {
+	try {
+		const response = await axiosClient.get('/user/details')
+		return response.data
+	} catch (error) {
+		if (error instanceof AxiosError && error.response) {
+			throw new Error(error.response.data.message)
+		} else {
+			throw new Error('Unexpected error')
+		}
+	}
+}
+
+export const updateUserDetails = async (payload: IUserDetails): Promise<boolean> => {
+	try {
+		await axiosClient.put('/user/details', payload)
+		return true
+	} catch (error) {
+		if (error instanceof AxiosError && error.response) {
+			throw new Error(error.response.data.message)
+		} else {
+			throw new Error('Unexpected error')
 		}
 	}
 }

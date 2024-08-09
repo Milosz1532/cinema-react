@@ -86,3 +86,17 @@ export interface IHomeData {
 		tomorrow: IHomeShowtime[]
 	}
 }
+
+export interface IUser {
+	email: string
+	isLoggedIn: boolean
+}
+
+export interface IUserDetails {
+	firstName: string
+	lastName: string
+	email?: string
+	phoneNumber: string
+	birthDate: string
+	city: string
+}

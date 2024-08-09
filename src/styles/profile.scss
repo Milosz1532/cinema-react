@@ -108,6 +108,11 @@
 		margin-bottom: 5px;
 	}
 
+	&.disabled {
+		opacity: 0.5;
+		pointer-events: none;
+	}
+
 	input {
 		width: 100%;
 		padding: 10px 0px;
